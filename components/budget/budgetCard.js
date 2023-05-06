@@ -1,5 +1,9 @@
 import React from 'react';
-import { Button, Card, ProgressBar, Stack } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import Stack from 'react-bootstrap/Stack';
+
 import { currencyFormatter } from '../../utils';
 
 const BudgetCard =({ name, amount, max, gray })=>{
