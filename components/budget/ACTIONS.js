@@ -3,4 +3,5 @@ export const ACTIONS = {
     DELETE_BUDGET: 'delete-budget',
     OPEN_FORM: 'open-form',
     CLOSE_FORM: 'close-form',
+    ADD_EXPENSE: 'add-expense'
 }

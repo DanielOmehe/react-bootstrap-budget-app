@@ -6,11 +6,13 @@ import { reducer } from "../components/budget/reducer";
 export const BudgetContext = createContext(null);
 
 const initialState = {
-    isOpen: false,
-}
+  isOpen: false,
+  budgets: [],
+  expenses: []
+};
 
 const BudgetTracker = () => {
-    const [ state, dispatch ] = useReducer(reducer, { isOpen: false })
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <>
       <BudgetContext.Provider value={{ state, ACTIONS, dispatch }}>
