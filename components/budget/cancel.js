@@ -2,11 +2,12 @@ import { useContext } from "react";
 import Stack from "react-bootstrap/Stack";
 import { BudgetContext } from "../../pages";
 
-const Cancel =()=>{
-  const { ACTIONS, dispatch } = useContext(BudgetContext)
+const Cancel =({ type })=>{
+
+  const { closeForm } = useContext(BudgetContext);
   return (
     <>
-      <Stack direction="horizontal" className="position-relative top-0" onClick={() => dispatch({ type: ACTIONS.CLOSE_FORM })}>
+      <Stack direction="horizontal" className="position-relative top-0" onClick={()=>closeForm(type)}>
         <div className="cancel position-absolute">
           <div className="line bg-dark"></div>
           <div className="line bg-dark"></div>

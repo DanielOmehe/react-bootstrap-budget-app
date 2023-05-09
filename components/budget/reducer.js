@@ -11,17 +11,27 @@ const generateId =()=>{
     return idString;
 }
 
-export function reducer(state, {type, payload}){
+export function reducer(state, {type, field, payload}){
     switch(type){
         case ACTIONS.OPEN_FORM: 
         return {
             ...state, 
             isOpen: true
         }
+        case ACTIONS.OPEN_EXPENSE_FORM: 
+        return {
+            ...state, 
+            open: true
+        }
         case ACTIONS.CLOSE_FORM: 
         return {
             ...state, 
             isOpen: false
+        }
+        case ACTIONS.CLOSE_EXPENSE_FORM: 
+        return {
+            ...state, 
+            open: false
         }
         case ACTIONS.ADD_BUDGET:
             return {
@@ -40,5 +50,12 @@ export function reducer(state, {type, payload}){
                 ...state,
                 budgets: state.budgets.filter(budget => budget.id !== payload.id)
             }
+        case ACTIONS.HANDLE_FORM_INPUT:
+            return{
+                ...state,
+                [field]: payload.value
+            }
+        default: 
+            return state
     }
 }

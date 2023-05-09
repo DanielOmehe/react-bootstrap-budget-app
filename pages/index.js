@@ -1,5 +1,5 @@
 import Budget from "../components/budget";
-import { useState, createContext, useReducer } from "react";
+import { createContext, useReducer } from "react";
 import { ACTIONS } from "../components/budget/ACTIONS.JS";
 import { reducer } from "../components/budget/reducer";
 
@@ -7,15 +7,30 @@ export const BudgetContext = createContext(null);
 
 const initialState = {
   isOpen: false,
+  open: false,
   budgets: [],
   expenses: []
 };
 
 const BudgetTracker = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const handleChange = (e)=>{
+    dispatch({
+      type: ACTIONS.HANDLE_FORM_INPUT,
+      field: e.target.name,
+      payload: {
+        value: e.target.value
+      }
+    })
+  }
+
+  const closeForm =(type)=>{
+    dispatch({ type: type })
+  }
   return (
     <>
-      <BudgetContext.Provider value={{ state, ACTIONS, dispatch }}>
+      <BudgetContext.Provider value={{ state, ACTIONS, dispatch, handleChange, closeForm }}>
         <Budget />
       </BudgetContext.Provider>
     </>
