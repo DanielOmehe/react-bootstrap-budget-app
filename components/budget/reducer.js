@@ -55,6 +55,25 @@ export function reducer(state, {type, field, payload}){
                 ...state,
                 [field]: payload.value
             }
+        case ACTIONS.ADD_EXPENSE:
+            return {
+                ...state,
+                expenses: [
+                    ...state.expenses,
+                    {
+                        id: generateId(),
+                        name: payload.name,
+                        amount: payload.amount,
+                        category: payload.category,
+                        desc: payload.desc,
+                    }
+                ]
+            }
+        case ACTIONS.DELETE_EXPENSE: 
+            return {
+                ...state,
+                expenses: state.expenses.filter(expense => expense.id !== payload.id)
+            }
         default: 
             return state
     }

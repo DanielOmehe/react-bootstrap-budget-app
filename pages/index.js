@@ -25,12 +25,15 @@ const BudgetTracker = () => {
     })
   }
 
-  const closeForm =(type)=>{
-    dispatch({ type: type })
+  const handleShow = (type)=>{
+    dispatch({ type })
+  }
+  const handleClose = (type)=>{
+    dispatch({ type })
   }
   return (
     <>
-      <BudgetContext.Provider value={{ state, ACTIONS, dispatch, handleChange, closeForm }}>
+      <BudgetContext.Provider value={{ state, ACTIONS, dispatch, handleChange, handleShow, handleClose  }}>
         <Budget />
       </BudgetContext.Provider>
     </>

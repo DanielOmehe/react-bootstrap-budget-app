@@ -7,10 +7,11 @@ import { BudgetContext } from "../../pages";
 import Backdrop from "./backdrop";
 import Placeholder from "./placeholder";
 import Table from "react-bootstrap/Table";
-import AddExpensesForm from './addExpensesForm'
+import AddExpensesForm from "./addExpensesForm";
+import Expense from './expense';
 
 const Budget = () => {
-  const { state, ACTIONS, dispatch } = useContext(BudgetContext);
+  const { state, ACTIONS, dispatch, handleShow } = useContext(BudgetContext);
 
   return (
     <>
@@ -22,11 +23,16 @@ const Budget = () => {
           <h1 className="me-auto">Budgets</h1>
           <Button
             variant="primary"
-            onClick={() => dispatch({ type: ACTIONS.OPEN_FORM })}
+            onClick={() => handleShow(ACTIONS.OPEN_FORM)}
           >
             New Budget
           </Button>
-          <Button variant="outline-primary" onClick={()=> dispatch({ type: ACTIONS.OPEN_EXPENSE_FORM })} >New Expense</Button>
+          <Button
+            variant="outline-primary"
+            onClick={() => handleShow(ACTIONS.OPEN_EXPENSE_FORM)}
+          >
+            New Expense
+          </Button>
         </Stack>
         {state.budgets.length === 0 && <Placeholder />}
         <div className="budgets-container">
@@ -55,33 +61,9 @@ const Budget = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Larry the Bird</td>
-                <td>@twitter</td>
-                <td>@twitter</td>
-                <td>@twitter</td>
-                <td></td>
-                <td></td>
-              </tr>
+              {state.expenses.map((expense, id) => (
+                <Expense expense={expense} pos={id} />
+              ))}
             </tbody>
           </Table>
         </div>
@@ -95,7 +77,7 @@ const Budget = () => {
           min-height: 200px;
         }
 
-        .expenses-container{
+        .expenses-container {
           margin-top: 40px;
         }
       `}</style>
