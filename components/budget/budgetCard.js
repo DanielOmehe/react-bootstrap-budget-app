@@ -5,10 +5,12 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Stack from 'react-bootstrap/Stack';
 import { currencyFormatter } from '../../utils';
 import { useContext } from 'react';
-import { BudgetContext } from '../../pages';
+import { BudgetContext } from '../../widget/budgetContext';
+import { FaTrash } from 'react-icons/fa';
+import { FaEdit } from 'react-icons/fa';
 
 const BudgetCard =({ name, amount, max, gray, id })=>{
-    const { dispatch, ACTIONS } = useContext(BudgetContext);
+    const { dispatch, ACTIONS, handleEdit } = useContext(BudgetContext);
     const classNames = [];
     if(amount > max){
         classNames.push('bg-danger', 'bg-opacity-10')
@@ -27,8 +29,9 @@ const BudgetCard =({ name, amount, max, gray, id })=>{
                 <div className='d-flex align-items-baseline'> {currencyFormatter.format(amount)} / <span className='text-muted fs-6 ms-1'>{currencyFormatter.format(max)}</span> </div>
             </Card.Title>
             <ProgressBar className='rounded-pill' min={0} max={max} now={amount} variant={getProgressBarVariant(amount, max)} />
-            <Stack direction='horizontal' gap='2' className='mt-4'>
-                <Button variant='outline-danger' className='ms-auto' onClick={() => deleteBudget(id)}>Delete budget</Button>
+            <Stack direction='horizontal' gap='2' className='mt-4 d-flex justify-content-end'>
+                <Button variant='outline-secondary'  onClick={() => handleEdit(id)}><FaEdit /></Button>
+                <Button variant='outline-danger'  onClick={() => deleteBudget(id)}><FaTrash /></Button>
             </Stack>
         </Card.Body>
     </Card>

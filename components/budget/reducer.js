@@ -1,6 +1,6 @@
 import { ACTIONS } from "./ACTIONS.JS";
 
-const generateId =()=>{
+export const generateId =()=>{
     let string = 'abcdefghij123456789',
     idString = ''
 
@@ -73,6 +73,11 @@ export function reducer(state, {type, field, payload}){
             return {
                 ...state,
                 expenses: state.expenses.filter(expense => expense.id !== payload.id)
+            }
+        case ACTIONS.EDIT_BUDGET:
+            return {
+                ...state,
+                budgets: state.budgets.map((budget) => budget.id === payload.id ? { ...budget, isEditting: true } : budget)
             }
         default: 
             return state

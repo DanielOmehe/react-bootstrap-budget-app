@@ -3,12 +3,11 @@ import Container from "react-bootstrap/Container";
 import BudgetCard from "./budgetCard";
 import { useContext } from "react";
 import AddBudgetForm from "./addBudgetForm";
-import { BudgetContext } from "../../pages";
-import Backdrop from "./backdrop";
-import Placeholder from "./placeholder";
+import { BudgetContext } from "../../widget/budgetContext";
 import Table from "react-bootstrap/Table";
 import AddExpensesForm from "./addExpensesForm";
 import Expense from './expense';
+import Placeholder from "./placeholder";
 
 const Budget = () => {
   const { state, ACTIONS, dispatch, handleShow } = useContext(BudgetContext);
@@ -18,7 +17,6 @@ const Budget = () => {
       <Container className="my-4">
         <AddBudgetForm />
         <AddExpensesForm />
-        {state.isOpen | state.open ? <Backdrop /> : null}
         <Stack direction="horizontal" gap="2" className="mb-4">
           <h1 className="me-auto">Budgets</h1>
           <Button
@@ -61,7 +59,7 @@ const Budget = () => {
               </tr>
             </thead>
             <tbody>
-              {state.expenses.map((expense, id) => (
+              {state?.expenses?.map((expense, id) => (
                 <Expense expense={expense} pos={id} />
               ))}
             </tbody>
@@ -71,7 +69,7 @@ const Budget = () => {
       <style jsx>{`
         .budgets-container {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(3, 1fr);
           grid-template-row: minmax(100px, 200px);
           gap: 20px;
           min-height: 200px;

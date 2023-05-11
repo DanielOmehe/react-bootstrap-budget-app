@@ -2,7 +2,7 @@ import { currencyFormatter } from '../../utils';
 import {BsFillTrashFill} from 'react-icons/bs'
 import Button from 'react-bootstrap/Button'
 import { useContext } from 'react'
-import { BudgetContext } from '../../pages';
+import { BudgetContext } from '../../widget/budgetContext';
 
 const Expense =({expense, pos})=>{
     const { ACTIONS, dispatch } = useContext(BudgetContext)
