@@ -79,6 +79,11 @@ export function reducer(state, {type, field, payload}){
                 ...state,
                 budgets: state.budgets.map((budget) => budget.id === payload.id ? { ...budget, isEditting: true } : budget)
             }
+        case ACTIONS.GET_TOTAL_BUDGET:
+            return{
+                ...state,
+                totalExpense: state.expenses.filter((expense)=>expense.category === payload.category)
+            }
         default: 
             return state
     }

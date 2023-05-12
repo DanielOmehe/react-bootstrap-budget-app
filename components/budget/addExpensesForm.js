@@ -22,7 +22,6 @@ const AddExpensesForm = () => {
 
   const addExpense =()=>{
     dispatch({ type: ACTIONS.ADD_EXPENSE, payload: { name: state.expense, amount: state.amount, category: state.category, desc: state.desc } })
-    console.log(state.expenses);
   }
   return (
     <>

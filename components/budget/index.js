@@ -10,7 +10,7 @@ import Expense from './expense';
 import Placeholder from "./placeholder";
 
 const Budget = () => {
-  const { state, ACTIONS, dispatch, handleShow } = useContext(BudgetContext);
+  const { state, ACTIONS, dispatch, handleShow, getTotalExpenses } = useContext(BudgetContext);
 
   return (
     <>
@@ -37,10 +37,11 @@ const Budget = () => {
           {state.budgets.map((budget) => (
             <BudgetCard
               name={budget.name}
-              amount={0}
+              amount={getTotalExpenses(budget.name)}
               max={budget.amount}
               id={budget.id}
               key={budget.id}
+              ratio={()=>{ return (getTotalExpenses(budget.name) / budget.amount) * 100 }}
               gray
             />
           ))}
@@ -59,8 +60,8 @@ const Budget = () => {
               </tr>
             </thead>
             <tbody>
-              {state?.expenses?.map((expense, id) => (
-                <Expense expense={expense} pos={id} />
+              {state.expenses.map((expense, id) => (
+                <Expense key={expense.id} expense={expense} pos={id} />
               ))}
             </tbody>
           </Table>

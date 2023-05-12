@@ -31,7 +31,6 @@ const initialState = {
 
 const BudgetProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
 
   const handleChange = (e) => {
     dispatch({
@@ -42,6 +41,10 @@ const BudgetProvider = ({ children }) => {
       },
     });
   };
+
+  const getTotalExpenses =(category)=>{
+    return state.expenses ? state.expenses.filter((expenses) => expenses.category === category).reduce((accum, expense) => { return accum + parseFloat(expense.amount) }, 0) : 0
+}
 
   const handleShow = (type) => {
     dispatch({ type });
@@ -64,6 +67,7 @@ const BudgetProvider = ({ children }) => {
         handleShow,
         handleClose,
         handleEdit,
+        getTotalExpenses
       }}
     >
       {children}
