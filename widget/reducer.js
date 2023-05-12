@@ -74,15 +74,20 @@ export function reducer(state, {type, field, payload}){
                 ...state,
                 expenses: state.expenses.filter(expense => expense.id !== payload.id)
             }
-        case ACTIONS.EDIT_BUDGET:
+        case ACTIONS.START_EDIT:
             return {
                 ...state,
                 budgets: state.budgets.map((budget) => budget.id === payload.id ? { ...budget, isEditting: true } : budget)
             }
-        case ACTIONS.GET_TOTAL_BUDGET:
-            return{
+        case ACTIONS.CANCEL_EDIT:
+            return {
                 ...state,
-                totalExpense: state.expenses.filter((expense)=>expense.category === payload.category)
+                budgets: state.budgets.map((budget) => budget.isEditting === true ? { ...budget, isEditting: false } : budget)
+            }
+        case ACTIONS.EDIT_BUDGET:
+            return {
+                ...state,
+                budgets: state.budgets.map(budget => budget.isEditting ? { ...budget, name: payload.name, amount: payload.amount } : budget )
             }
         default: 
             return state

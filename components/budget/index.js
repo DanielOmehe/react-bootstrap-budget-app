@@ -41,6 +41,7 @@ const Budget = () => {
               max={budget.amount}
               id={budget.id}
               key={budget.id}
+              isEditting={budget.isEditting}
               ratio={()=>{ return (getTotalExpenses(budget.name) / budget.amount) * 100 }}
               gray
             />

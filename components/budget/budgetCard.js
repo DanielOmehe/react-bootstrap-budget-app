@@ -8,9 +8,10 @@ import { useContext } from 'react';
 import { BudgetContext } from '../../widget/budgetContext';
 import { FaTrash } from 'react-icons/fa';
 import { FaEdit } from 'react-icons/fa';
+import EditBudgetForm from './editBudgetForm'
 
-const BudgetCard =({ name, amount, max, gray, id, ratio })=>{
-    const { state, dispatch, ACTIONS, handleEdit } = useContext(BudgetContext);
+const BudgetCard =({ name, amount, max, gray, id, ratio, isEditting })=>{
+    const { dispatch, ACTIONS, handleEdit } = useContext(BudgetContext);
     const classNames = [];
     if(amount > max){
         classNames.push('bg-danger', 'bg-opacity-10')
@@ -18,13 +19,12 @@ const BudgetCard =({ name, amount, max, gray, id, ratio })=>{
         classNames.push('bg-light')
     }
 
-
-
     const deleteBudget =(id)=>{
         dispatch({ type: ACTIONS.DELETE_BUDGET, payload: { id: id } })
     }
   return (
     <Card className={classNames.join(' ')}>
+        <EditBudgetForm name={name} edit={isEditting} />
         <Card.Body>
             <Card.Title className='d-flex justify-content-between align-items-baseline fw-normal mb-3'>
                 <div className='me-2'>{name}</div>

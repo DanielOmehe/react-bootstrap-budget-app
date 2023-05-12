@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
-import { ACTIONS } from "../components/budget/ACTIONS.JS";
-import { reducer } from "../components/budget/reducer";
-import { generateId } from "../components/budget/reducer";
+import { ACTIONS } from "./ACTIONS.js";
+import { generateId } from "./reducer";
+import { reducer } from "./reducer";
 
 export const BudgetContext = createContext(null);
 
@@ -42,17 +42,27 @@ const BudgetProvider = ({ children }) => {
     });
   };
 
-  const getTotalExpenses =(category)=>{
-    return state.expenses ? state.expenses.filter((expenses) => expenses.category === category).reduce((accum, expense) => { return accum + parseFloat(expense.amount) }, 0) : 0
-}
+  const getTotalExpenses = (category) => {
+    return state.expenses
+      ? state.expenses
+          .filter((expenses) => expenses.category === category)
+          .reduce((accum, expense) => {
+            return accum + parseFloat(expense.amount);
+          }, 0)
+      : 0;
+  };
 
   const handleShow = (type) => {
     dispatch({ type });
   };
 
   const handleEdit = (id) => {
-    dispatch({ type: ACTIONS.EDIT_BUDGET, payload: { id } });
+    dispatch({ type: ACTIONS.START_EDIT, payload: { id } });
   };
+
+  const cancelEdit =(id)=>{
+    dispatch({ type: ACTIONS.CANCEL_EDIT, payload: { id } })
+  }
 
   const handleClose = (type) => {
     dispatch({ type });
@@ -62,12 +72,13 @@ const BudgetProvider = ({ children }) => {
       value={{
         state,
         ACTIONS,
+        cancelEdit,
         dispatch,
         handleChange,
         handleShow,
         handleClose,
         handleEdit,
-        getTotalExpenses
+        getTotalExpenses,
       }}
     >
       {children}
