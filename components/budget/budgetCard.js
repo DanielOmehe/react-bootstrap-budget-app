@@ -32,7 +32,7 @@ const BudgetCard =({ name, amount, max, gray, id, ratio, isEditting })=>{
             </Card.Title>
             <ProgressBar className='rounded-pill' min={0} max={max} label={`${ratio()}%`} now={amount} variant={getProgressBarVariant(amount, max)} />
             <Stack direction='horizontal' gap='2' className='mt-4 d-flex justify-content-end'>
-                <Button variant='outline-secondary'  onClick={() => handleEdit(id)}><FaEdit /></Button>
+                <Button variant='outline-secondary'  onClick={() => handleEdit(ACTIONS.START_EDIT, id)}><FaEdit /></Button>
                 <Button variant='outline-danger'  onClick={() => deleteBudget(id)}><FaTrash /></Button>
             </Stack>
         </Card.Body>
@@ -45,8 +45,6 @@ function getProgressBarVariant(amount, max){
     if(ratio < .5) return 'primary'
     if(ratio < .75) return 'warning'
     return 'danger'
-
-    console.log(amount)
 }
 
 export default BudgetCard

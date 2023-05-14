@@ -1,6 +1,5 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Cancel from "./cancel";
 import { useContext } from "react";
 import { BudgetContext } from "../../widget/budgetContext";
 import Modal from "react-bootstrap/Modal";

@@ -1,6 +1,9 @@
 export const ACTIONS = {
     ADD_BUDGET: 'add-budget',
     EDIT_BUDGET: 'edit-budget',
+    EDIT_EXPENSES: 'edit-expenses',
+    CANCEL_EDIT_EXPENSES: 'cancel-edit-expenses',
+    UPDATE_EXPENSES: 'update-expenses',
     CANCEL_EDIT: 'cancel-edit',
     ADD_EXPENSE: 'add-expenses',
     DELETE_BUDGET: 'delete-budget',

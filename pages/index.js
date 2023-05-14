@@ -1,4 +1,4 @@
-import Budget from "../components/budget";
+import Budget from "../components";
 import BudgetProvider from "../widget/budgetContext";
 
 const BudgetTracker = () => {

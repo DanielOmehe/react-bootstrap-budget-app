@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import { useContext } from "react";
 import { BudgetContext } from "../../widget/budgetContext";
 
-const expenses = [
+export const expenses = [
   "Choose Category",
   "Entertainment",
   "Education",
@@ -13,7 +13,7 @@ const expenses = [
   "Charity",
   "Feeding",
   "Electricity",
-  "Utilites",
+  "Utilities",
 ];
 
 const AddExpensesForm = () => {

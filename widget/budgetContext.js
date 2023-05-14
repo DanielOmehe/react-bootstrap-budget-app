@@ -46,8 +46,8 @@ const BudgetProvider = ({ children }) => {
     return state.expenses
       ? state.expenses
           .filter((expenses) => expenses.category === category)
-          .reduce((accum, expense) => {
-            return accum + parseFloat(expense.amount);
+          .reduce((accum, {amount}) => {
+            return accum + parseFloat(amount);
           }, 0)
       : 0;
   };
@@ -56,8 +56,8 @@ const BudgetProvider = ({ children }) => {
     dispatch({ type });
   };
 
-  const handleEdit = (id) => {
-    dispatch({ type: ACTIONS.START_EDIT, payload: { id } });
+  const handleEdit = (type, id) => {
+    dispatch({ type, payload: { id } })
   };
 
   const cancelEdit =(id)=>{

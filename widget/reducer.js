@@ -66,8 +66,9 @@ export function reducer(state, { type, field, payload }) {
             amount: payload.amount,
             category: payload.category,
             desc: payload.desc,
-          },
-        ],
+            edit: false
+          }
+        ]
       };
     case ACTIONS.DELETE_EXPENSE:
       return {
@@ -96,7 +97,22 @@ export function reducer(state, { type, field, payload }) {
             ? { ...budget, name: payload.name, amount: payload.amount }
             : budget
         ),
-      };
+      }
+    case ACTIONS.EDIT_EXPENSES:
+      return {
+        ...state,
+        expenses: state.expenses.map((expense) => expense.id === payload.id ? { ...expense, edit: true } : expense)
+      }
+    case ACTIONS.CANCEL_EDIT_EXPENSES:
+      return {
+        ...state,
+        expenses: state.expenses.map(expense => expense.edit ? { ...expense, edit: false } : expense)
+      }
+    case ACTIONS.UPDATE_EXPENSES:
+      return {
+         ...state,
+         expenses: state.expenses.map(expense => expense.edit ? { ...expense, name: payload.name, amount: payload.amount, desc: payload.desc, category: payload.category } : expense )
+      }
     default:
       return state;
   }
