@@ -1,4 +1,4 @@
-import { ACTIONS } from "./ACTIONS.JS";
+import { ACTIONS } from "./ACTIONS.js";
 
 export const generateId = () => {
   let string = "abcdefghij123456789",
